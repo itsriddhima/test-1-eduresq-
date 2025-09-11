@@ -1,4 +1,4 @@
-EduResQ Website Project
+EduResQ Website Project - Imported from another account of mine
 
 Contents:
 - index.html (Landing Page)
