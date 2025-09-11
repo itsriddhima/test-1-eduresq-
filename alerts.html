@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduResQ - Emergency Alerts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --color-navy: #0A1F44;
+      --color-orange: #FF6F3C;
+      --color-white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    .font-logo {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card {
+      background-color: var(--color-navy);
+      border: 1px solid var(--color-orange);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 111, 60, 0.5);
+    }
+
+    .urgent-badge {
+      background-color: var(--color-orange);
+      color: var(--color-navy);
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      animation: pulse 2s ease-in-out infinite;
+      font-size: 0.85rem;
+      user-select: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.6;
+      }
+    }
+
+    .btn-primary {
+      @apply bg-[var(--color-orange)] text-white font-semibold px-6 py-3 rounded-lg transition transform hover:scale-105 hover:shadow-xl;
+    }
+
+    /* Search input */
+    input[type="search"] {
+      background-color: #112956;
+      border: 1px solid var(--color-orange);
+      color: var(--color-white);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="search"]:focus {
+      outline: none;
+      border-color: white;
+      box-shadow: 0 0 8px var(--color-orange);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="flex items-center justify-between px-8 py-6 bg-[var(--color-navy)] sticky top-0 z-50">
+    <a href="index.html" class="flex items-center space-x-3">
+      <div
+        class="w-12 h-12 bg-[var(--color-orange)] rounded-full flex items-center justify-center font-logo text-2xl drop-shadow-lg select-none cursor-default">
+        ER
+      </div>
+      <h1 class="text-3xl font-logo font-bold select-none">EduResQ</h1>
+    </a>
+    <nav class="space-x-6 font-semibold text-white text-lg hidden md:block">
+      <a href="index.html" class="hover:text-[var(--color-orange)] transition">Home</a>
+      <a href="modules.html" class="hover:text-[var(--color-orange)] transition">Learning Modules</a>
+      <a href="alerts.html" class="hover:text-[var(--color-orange)] transition">Emergency Alerts</a>
+      <a href="dashboard.html" class="hover:text-[var(--color-orange)] transition">Admin Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-5xl mx-auto px-6 py-12 space-y-8">
+    <h2 class="text-4xl font-logo font-extrabold text-center text-[var(--color-orange)] mb-8">Emergency Alerts</h2>
+
+    <div class="flex justify-center">
+      <input type="search" id="searchInput" placeholder="Search alerts (e.g., flood, earthquake)" aria-label="Search Alerts" />
+    </div>
+
+    <section id="alertsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Alert Cards inserted by JS -->
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[var(--color-navy)] mt-24 py-8 border-t border-[var(--color-orange)]">
+    <div class="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300 space-y-4 md:space-y-0">
+      <div>
+        <p>Contact: info@eduresq.org | Phone: +1 234 567 8901</p>
+        <p>© 2025 EduResQ. All rights reserved.</p>
+      </div>
+      <div class="space-x-6">
+        <a href="#" aria-label="Facebook" class="hover:text-[var(--color-orange)] transition">Facebook</a>
+        <a href="#" aria-label="Twitter" class="hover:text-[var(--color-orange)] transition">Twitter</a>
+        <a href="#" aria-label="LinkedIn" class="hover:text-[var(--color-orange)] transition">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const alerts = [
+      {
+        id: 1,
+        title: "Punjab Flood 2025",
+        description: "Severe flooding reported in Punjab. Take necessary precautions.",
+        type: "Flood",
+        date: "2025-08-15",
+        urgent: true,
+      },
+      {
+        id: 2,
+        title: "UP Earthquake 2024",
+        description: "Moderate earthquake detected in Uttar Pradesh. Stay safe.",
+        type: "Earthquake",
+        date: "2024-11-03",
+        urgent: false,
+      },
+      {
+        id: 3,
+        title: "Cyclone Alert - Odisha 2025",
+        description: "Cyclone approaching Odisha coast, expected landfall within 48 hours.",
+        type: "Cyclone",
+        date: "2025-09-08",
+        urgent: true,
+      },
+      {
+        id: 4,
+        title: "Fire Hazard - Maharashtra 2025",
+        description: "Fire risk due to high temperatures and dry conditions.",
+        type: "Fire",
+        date: "2025-06-20",
+        urgent: false,
+      },
+      {
+        id: 5,
+        title: "Landslide Warning - Himachal Pradesh 2025",
+        description: "Heavy rains increase the risk of landslides in mountainous areas.",
+        type: "Landslide",
+        date: "2025-07-30",
+        urgent: true,
+      },
+    ];
+
+    function createAlertCard(alert) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="text-xl font-semibold text-[var(--color-orange)]">${alert.title}</h3>
+          ${alert.urgent ? `<span class="urgent-badge">URGENT</span>` : ''}
+        </div>
+        <p class="mb-2">${alert.description}</p>
+        <p class="text-sm text-gray-300"><strong>Type:</strong> ${alert.type} | <strong>Date:</strong> ${alert.date}</p>
+      `;
+      return card;
+    }
+
+    function renderAlerts(alertsToRender) {
+      const container = document.getElementById('alertsContainer');
+      container.innerHTML = '';
+      if (alertsToRender.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-center text-gray-400">No alerts found.</p>';
+        return;
+      }
+      alertsToRender.forEach(alert => {
+        container.appendChild(createAlertCard(alert));
+      });
+    }
+
+    // Initial render
+    renderAlerts(alerts);
+
+    // Search/filter functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const filteredAlerts = alerts.filter(alert =>
+        alert.title.toLowerCase().includes(query) ||
+        alert.description.toLowerCase().includes(query) ||
+        alert.type.toLowerCase().includes(query)
+      );
+      renderAlerts(filteredAlerts);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduResQ - Learning Modules</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --color-navy: #0A1F44;
+      --color-orange: #FF6F3C;
+      --color-white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    .font-logo {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card {
+      background-color: var(--color-navy);
+      border: 1px solid var(--color-orange);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(255, 111, 60, 0.5);
+    }
+
+    .btn-primary {
+      @apply bg-[var(--color-orange)] text-white font-semibold px-6 py-3 rounded-lg transition transform hover:scale-105 hover:shadow-xl;
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Quiz styles */
+    .quiz-option {
+      background-color: #112956;
+      border: 2px solid var(--color-orange);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 8px 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .quiz-option:hover {
+      background-color: var(--color-orange);
+      color: var(--color-navy);
+      border-color: var(--color-white);
+    }
+
+    .quiz-option.correct {
+      background-color: #22c55e; /* green */
+      color: var(--color-navy);
+      border-color: #15803d;
+      cursor: default;
+    }
+
+    .quiz-option.incorrect {
+      background-color: #ef4444; /* red */
+      color: var(--color-white);
+      border-color: #b91c1c;
+      cursor: default;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="flex items-center justify-between px-8 py-6 bg-[var(--color-navy)] sticky top-0 z-50">
+    <a href="index.html" class="flex items-center space-x-3">
+      <div
+        class="w-12 h-12 bg-[var(--color-orange)] rounded-full flex items-center justify-center font-logo text-2xl drop-shadow-lg select-none cursor-default">
+        ER
+      </div>
+      <h1 class="text-3xl font-logo font-bold select-none">EduResQ</h1>
+    </a>
+    <nav class="space-x-6 font-semibold text-white text-lg hidden md:block">
+      <a href="index.html" class="hover:text-[var(--color-orange)] transition">Home</a>
+      <a href="modules.html" class="hover:text-[var(--color-orange)] transition">Learning Modules</a>
+      <a href="alerts.html" class="hover:text-[var(--color-orange)] transition">Emergency Alerts</a>
+      <a href="dashboard.html" class="hover:text-[var(--color-orange)] transition">Admin Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl mx-auto px-6 py-12 space-y-16">
+    <h2 class="text-4xl font-logo font-extrabold text-center text-[var(--color-orange)] mb-12">Learning Modules</h2>
+
+    <!-- Modules Section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <article class="card">
+        <h3 class="text-2xl font-semibold mb-4 text-[var(--color-orange)]">Module 1: Earthquake Drill</h3>
+        <div class="aspect-w-16 aspect-h-9 mb-4">
+          <iframe class="w-full h-64 rounded-md border border-[var(--color-orange)]"
+            src="https://www.youtube.com/embed/BLEPakj1YTY" title="Earthquake Drill Video" frameborder="0"
+            allowfullscreen></iframe>
+        </div>
+        <p>Learn the basics of staying safe during an earthquake with this instructional video.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="text-2xl font-semibold mb-4 text-[var(--color-orange)]">Module 2: Flood Preparedness</h3>
+        <div class="aspect-w-16 aspect-h-9 mb-4">
+          <iframe class="w-full h-64 rounded-md border border-[var(--color-orange)]"
+            src="https://www.youtube.com/embed/43M5mZuzHF8" title="Flood Preparedness Video" frameborder="0"
+            allowfullscreen></iframe>
+        </div>
+        <p>Understand how to prepare your home and family for flood emergencies.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="text-2xl font-semibold mb-4 text-[var(--color-orange)]">Module 3: Fire Safety Drill</h3>
+        <div class="aspect-w-16 aspect-h-9 mb-4">
+          <iframe class="w-full h-64 rounded-md border border-[var(--color-orange)]"
+            src="https://www.youtube.com/embed/5SJXnDSq6HA" title="Fire Safety Drill Video" frameborder="0"
+            allowfullscreen></iframe>
+        </div>
+        <p>Step-by-step guide on how to evacuate safely during a fire emergency.</p>
+      </article>
+
+      <article class="card">
+        <h3 class="text-2xl font-semibold mb-4 text-[var(--color-orange)]">Module 4: Cyclone Preparedness</h3>
+        <div class="aspect-w-16 aspect-h-9 mb-4">
+          <iframe class="w-full h-64 rounded-md border border-[var(--color-orange)]"
+            src="https://www.youtube.com/embed/Li1ysRexTY8" title="Cyclone Preparedness Video" frameborder="0"
+            allowfullscreen></iframe>
+        </div>
+        <p>Key practices to safeguard yourself and your property during a cyclone.</p>
+      </article>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="max-w-4xl mx-auto bg-[var(--color-navy)] border border-[var(--color-orange)] rounded-lg p-8">
+      <h2 class="text-3xl font-logo font-bold mb-6 text-[var(--color-orange)]">Quick Quiz: Test Your Knowledge</h2>
+      <form id="quizForm" class="space-y-6">
+        <div>
+          <p class="mb-2 font-semibold text-lg">1. What should you do first during an earthquake?</p>
+          <div class="quiz-option" data-question="0" data-answer="a">a) Drop, cover, and hold on</div>
+          <div class="quiz-option" data-question="0" data-answer="b">b) Run outside immediately</div>
+          <div class="quiz-option" data-question="0" data-answer="c">c) Call emergency services right away</div>
+          <div class="quiz-option" data-question="0" data-answer="d">d) Stand near windows</div>
+        </div>
+
+        <div>
+          <p class="mb-2 font-semibold text-lg">2. Which is a key preparation step for floods?</p>
+          <div class="quiz-option" data-question="1" data-answer="a">a) Turn off electricity and gas</div>
+          <div class="quiz-option" data-question="1" data-answer="b">b) Leave doors open</div>
+          <div class="quiz-option" data-question="1" data-answer="c">c) Store heavy objects on windowsills</div>
+          <div class="quiz-option" data-question="1" data-answer="d">d) Ignore weather alerts</div>
+        </div>
+
+        <div>
+          <p class="mb-2 font-semibold text-lg">3. How should you evacuate during a fire drill?</p>
+          <div class="quiz-option" data-question="2" data-answer="a">a) Use the elevators</div>
+          <div class="quiz-option" data-question="2" data-answer="b">b) Run quickly and push others</div>
+          <div class="quiz-option" data-question="2" data-answer="c">c) Use designated fire exits calmly</div>
+          <div class="quiz-option" data-question="2" data-answer="d">d) Collect personal belongings first</div>
+        </div>
+
+        <button type="button" id="submitQuiz" class="btn-primary mt-4">Submit Answers</button>
+      </form>
+
+      <p id="scoreDisplay" class="mt-6 text-xl font-semibold text-[var(--color-orange)]"></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[var(--color-navy)] mt-24 py-8 border-t border-[var(--color-orange)]">
+    <div class="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300 space-y-4 md:space-y-0">
+      <div>
+        <p>Contact: info@eduresq.org | Phone: +1 234 567 8901</p>
+        <p>© 2025 EduResQ. All rights reserved.</p>
+      </div>
+      <div class="space-x-6">
+        <a href="#" aria-label="Facebook" class="hover:text-[var(--color-orange)] transition">Facebook</a>
+        <a href="#" aria-label="Twitter" class="hover:text-[var(--color-orange)] transition">Twitter</a>
+        <a href="#" aria-label="LinkedIn" class="hover:text-[var(--color-orange)] transition">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Quiz logic
+    const correctAnswers = ['a', 'a', 'c'];
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    const submitBtn = document.getElementById('submitQuiz');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const answeredQuestions = new Set();
+
+    quizOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const q = option.dataset.question;
+        if (answeredQuestions.has(q)) return; // Prevent multiple answers per question
+
+        answeredQuestions.add(q);
+
+        if (option.dataset.answer === correctAnswers[q]) {
+          option.classList.add('correct');
+          score++;
+        } else {
+          option.classList.add('incorrect');
+          // Mark correct option
+          document.querySelector(`.quiz-option[data-question="${q}"][data-answer="${correctAnswers[q]}"]`).classList.add('correct');
+        }
+
+        // Disable all options for that question
+        document.querySelectorAll(`.quiz-option[data-question="${q}"]`).forEach(opt => opt.style.pointerEvents = 'none');
+      });
+    });
+
+    let score = 0;
+
+    submitBtn.addEventListener('click', () => {
+      if (answeredQuestions.size < correctAnswers.length) {
+        alert("Please answer all questions before submitting.");
+        return;
+      }
+      scoreDisplay.textContent = `You scored ${score} out of ${correctAnswers.length} correct!`;
+      submitBtn.disabled = true;
+      submitBtn.classList.remove('btn-primary');
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    });
+  </script>
+</body>
+
+</html>

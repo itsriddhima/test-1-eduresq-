@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduResQ - Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --color-navy: #0A1F44;
+      --color-orange: #FF6F3C;
+      --color-white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    .font-logo {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      background-color: var(--color-navy);
+      width: 280px;
+      min-height: 100vh;
+      border-right: 2px solid var(--color-orange);
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    #sidebar a {
+      color: var(--color-white);
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      display: block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    #sidebar a:hover,
+    #sidebar a.active {
+      background-color: var(--color-orange);
+      color: var(--color-navy);
+      box-shadow: 0 4px 12px rgba(255, 111, 60, 0.6);
+    }
+
+    /* Main Content */
+    #content {
+      margin-left: 280px;
+      padding: 2rem;
+      flex-grow: 1;
+    }
+
+    /* Card */
+    .card {
+      background-color: var(--color-navy);
+      border: 1px solid var(--color-orange);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 8px rgba(255, 111, 60, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 0 16px rgba(255, 111, 60, 0.4);
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #334155;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    th {
+      background-color: #112956;
+    }
+
+    tbody tr:hover {
+      background-color: #1f2a5e;
+    }
+
+    /* Progress bars */
+    .progress-container {
+      background-color: #112956;
+      border-radius: 0.5rem;
+      height: 1.25rem;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: var(--color-orange);
+      border-radius: 0.5rem 0 0 0.5rem;
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #sidebar {
+        width: 60px;
+        padding: 1rem 0.5rem;
+      }
+
+      #sidebar a {
+        font-size: 0;
+        padding: 0.75rem 0.5rem;
+        border-radius: 0;
+      }
+
+      #sidebar a::before {
+        content: attr(data-short);
+        font-size: 1.5rem;
+        color: var(--color-white);
+        display: block;
+        text-align: center;
+      }
+
+      #content {
+        margin-left: 60px;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="flex">
+  <!-- Sidebar -->
+  <aside id="sidebar" aria-label="Sidebar Navigation">
+    <a href="index.html" data-short="🏠" title="Home">Home</a>
+    <a href="modules.html" data-short="📚" title="Learning Modules">Modules</a>
+    <a href="alerts.html" data-short="🚨" title="Emergency Alerts">Alerts</a>
+    <a href="dashboard.html" data-short="📊" title="Admin Dashboard" class="active">Dashboard</a>
+  </aside>
+
+  <!-- Main content -->
+  <div id="content" class="flex flex-col space-y-12">
+    <header>
+      <h1 class="text-4xl font-logo font-extrabold mb-4 text-[var(--color-orange)]">Admin Dashboard</h1>
+      <p class="text-gray-300 max-w-xl">Overview of preparedness percentages, student progress, and quiz scores.</p>
+    </header>
+
+    <!-- Preparedness Charts -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="card">
+        <h2 class="text-2xl font-semibold mb-6 text-[var(--color-orange)]">Preparedness Percentages</h2>
+        <canvas id="preparednessChart" aria-label="Preparedness Percentages Chart" role="img"></canvas>
+      </div>
+
+      <div class="card">
+        <h2 class="text-2xl font-semibold mb-6 text-[var(--color-orange)]">Progress Bars</h2>
+        <div class="space-y-6">
+          <div>
+            <p class="mb-1 font-semibold">Class A: 75% Prepared</p>
+            <div class="progress-container" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+              aria-label="CLass A preparedness progress bar">
+              <div class="progress-bar" style="width: 75%;"></div>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 font-semibold">CLass B: 40% Prepared</p>
+            <div class="progress-container" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+              aria-label="CLass B preparedness progress bar">
+              <div class="progress-bar" style="width: 40%;"></div>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 font-semibold">CLass C: 60% Prepared</p>
+            <div class="progress-container" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+              aria-label="CLass C preparedness progress bar">
+              <div class="progress-bar" style="width: 60%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Tables -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-[var(--color-orange)]">Student Progress</h2>
+      <div class="card overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Module Completed</th>
+              <th>Quiz Score</th>
+              <th>Last Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rahul Kumar</td>
+              <td>Earthquake Drill, Flood Preparedness</td>
+              <td>85%</td>
+              <td>2025-09-08</td>
+            </tr>
+            <tr>
+              <td>Karan Johar</td>
+              <td>Earthquake Drill</td>
+              <td>90%</td>
+              <td>2025-09-09</td>
+            </tr>
+            <tr>
+              <td>Mohit Kumar</td>
+              <td>Fire Safety Drill, Cyclone Preparedness</td>
+              <td>75%</td>
+              <td>2025-09-07</td>
+            </tr>
+            <tr>
+              <td>Luma Ali</td>
+              <td>Flood Preparedness</td>
+              <td>80%</td>
+              <td>2025-09-10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-[var(--color-orange)]">Quiz Scores</h2>
+      <div class="card overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Quiz</th>
+              <th>Score</th>
+              <th>Date Taken</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rahul Kumar</td>
+              <td>Earthquake Drill Quiz</td>
+              <td>85%</td>
+              <td>2025-09-08</td>
+            </tr>
+            <tr>
+              <td>Karan Johar</td>
+              <td>Flood Preparedness Quiz</td>
+              <td>90%</td>
+              <td>2025-09-09</td>
+            </tr>
+            <tr>
+              <td>Mohit Kumar</td>
+              <td>Fire Safety Drill Quiz</td>
+              <td>75%</td>
+              <td>2025-09-07</td>
+            </tr>
+            <tr>
+              <td>Luma Ali</td>
+              <td>Cyclone Preparedness Quiz</td>
+              <td>80%</td>
+              <td>2025-09-10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('preparednessChart').getContext('2d');
+    const preparednessChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Class A', 'Class B', 'Class C', 'Class D', 'Class E'],
+        datasets: [{
+          label: 'Preparedness %',
+          data: [75, 40, 60, 55, 80],
+          backgroundColor: 'rgba(255, 111, 60, 0.8)',
+          borderColor: 'rgba(255, 111, 60, 1)',
+          borderWidth: 1,
+          borderRadius: 6,
+          maxBarThickness: 40
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20,
+              color: '#FFFFFF',
+              font: {
+                size: 14
+              }
+            },
+            grid: {
+              color: '#334155'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#FFFFFF',
+              font: {
+                size: 14
+              }
+            },
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#FFFFFF',
+              font: {
+                size: 16
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(255, 111, 60, 0.9)',
+            titleColor: '#0A1F44',
+            bodyColor: '#0A1F44',
+            cornerRadius: 6,
+            displayColors: false,
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

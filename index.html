@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduResQ - Learn. Prepare. Respond.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom colors */
+    :root {
+      --color-navy: #0A1F44;
+      --color-orange: #FF6F3C;
+      --color-white: #FFFFFF;
+    }
+
+    /* Font families */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    .font-logo {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Smooth button hover effect */
+    .btn-primary {
+      @apply bg-[var(--color-orange)] text-white font-semibold px-6 py-3 rounded-lg transition transform hover:scale-105 hover:shadow-xl;
+    }
+
+    /* Animated hero text slide */
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-slideIn {
+      animation: slideIn 1.2s ease forwards;
+    }
+
+    /* Footer link underline on hover */
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="flex items-center justify-between px-8 py-6 bg-[var(--color-navy)] sticky top-0 z-50">
+    <a href="index.html" class="flex items-center space-x-3">
+      <!-- Logo placeholder circle with ER initials -->
+      <div class="w-12 h-12 bg-[var(--color-orange)] rounded-full flex items-center justify-center font-logo text-2xl drop-shadow-lg select-none cursor-default">
+        ER
+      </div>
+      <h1 class="text-3xl font-logo font-bold select-none">EduResQ</h1>
+    </a>
+    <nav class="space-x-6 font-semibold text-white text-lg hidden md:block">
+      <a href="index.html" class="hover:text-[var(--color-orange)] transition">Home</a>
+      <a href="modules.html" class="hover:text-[var(--color-orange)] transition">Learning Modules</a>
+      <a href="alerts.html" class="hover:text-[var(--color-orange)] transition">Emergency Alerts</a>
+      <a href="dashboard.html" class="hover:text-[var(--color-orange)] transition">Admin Dashboard</a>
+      <a href="AI.html" class="hover:text-[var(--color-orange)] transition">EduResQ AI</a>
+      
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="flex-grow flex flex-col justify-center px-8 md:px-20 text-center md:text-left mt-12 md:mt-24">
+    <div class="max-w-5xl mx-auto md:flex md:items-center md:space-x-12">
+      <div class="md:flex-1">
+        <h2 class="font-logo text-5xl md:text-6xl font-extrabold mb-4 animate-slideIn">EduResQ: Learn. Prepare. Respond.</h2>
+        <p class="mb-8 text-lg md:text-xl max-w-xl text-gray-200 animate-slideIn" style="animation-delay: 0.2s;">
+          Empower yourself with knowledge and skills to respond to disasters confidently and effectively.
+        </p>
+        <div 
+          class="space-x-4 flex flex-wrap justify-center md:justify-start gap-1 animate-slideIn" style="animation-delay: 0.4s;">
+          <a href="modules.html" class="bg-[#FF6F3C] text-white px-2.5 py-1.5 rounded-md shadow hover:bg-orange-600 transition">Start Learning</a>
+          <a href="alerts.html" class="bg-[#FF6F3C] text-white px-2.5 py-1.5 rounded-md shadow hover:bg-orange-600 transition">Emergency Alerts</a>
+          <a href="dashboard.html" class="bg-[#FF6F3C] text-white px-2.5 py-1.5 rounded-md shadow hover:bg-orange-600 transition">Admin Dashboard</a>
+        </div>
+
+      </div>
+      <div class="md:flex-1 mt-10 md:mt-0">
+        <!-- Hero Illustration -->
+        <img src="assets/logo1.png" alt="Disaster Preparedness Illustration" class="w-[120px] md:w-[1580px] lg:w-[2720px] h-auto animate-fadeIn mx-auto md:mx-0">
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[var(--color-navy)] mt-24 py-8 border-t border-[var(--color-orange)]">
+    <div class="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300 space-y-4 md:space-y-0">
+      <div>
+        <p>Contact: info@eduresq.org | Phone: +91 12345 67890</p>
+        <p>© 2025 EduResQ. All rights reserved.</p>
+      </div>
+      <div class="space-x-6">
+        <a href="#" aria-label="Facebook" class="footer-link hover:text-[var(--color-orange)] transition">Facebook</a>
+        <a href="#" aria-label="Twitter" class="footer-link hover:text-[var(--color-orange)] transition">Twitter</a>
+        <a href="#" aria-label="LinkedIn" class="footer-link hover:text-[var(--color-orange)] transition">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FadeIn animation for hero img
+    const heroImg = document.querySelector('img[alt="Disaster Preparedness Illustration"]');
+    if (heroImg) {
+      heroImg.style.opacity = 0;
+      setTimeout(() => {
+        heroImg.style.transition = 'opacity 1.5s ease';
+        heroImg.style.opacity = 1;
+      }, 100);
+    }
+  </script>
+</body>
+
+</html>

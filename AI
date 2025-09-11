@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduResQ AI - Disaster Preparedness & Response</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom scrollbar for chat area */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #ff6f3c;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-[#0A192F] text-white min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="flex items-center px-5 py-3 border-b border-[#223358]">
+    <div class="flex items-center space-x-3">
+      <img src="assets/logo.png" alt="EduResQ AI Logo" class="h-8 w-auto object-contain" />
+      <span class="font-semibold text-xl select-none">EduResQ AI</span>
+    </div>
+  </nav>
+
+  <!-- Main content area -->
+  <div class="flex flex-1 flex-col md:flex-row max-w-7xl mx-auto w-full">
+
+    <!-- Sidebar (Quick Prompts) -->
+    <aside
+      id="sidebar"
+      class="bg-[#081C2D] md:w-64 w-full md:block hidden flex-shrink-0 border-r border-[#223358] px-4 py-6 space-y-4"
+    >
+      <h2 class="text-lg font-semibold mb-3 select-none">Quick Prompts</h2>
+      <div class="flex flex-col space-y-3">
+        <button
+          type="button"
+          class="bg-[#FF6F3C] text-white px-3 py-1.5 rounded-md shadow hover:bg-orange-600 transition text-left focus:outline-none"
+          data-prompt="What should I do during an earthquake?"
+        >
+          What should I do during an earthquake?
+        </button>
+        <button
+          type="button"
+          class="bg-[#FF6F3C] text-white px-3 py-1.5 rounded-md shadow hover:bg-orange-600 transition text-left focus:outline-none"
+          data-prompt="How to prepare an emergency kit?"
+        >
+          How to prepare an emergency kit?
+        </button>
+        <button
+          type="button"
+          class="bg-[#FF6F3C] text-white px-3 py-1.5 rounded-md shadow hover:bg-orange-600 transition text-left focus:outline-none"
+          data-prompt="First aid steps for flood victims"
+        >
+          First aid steps for flood victims
+        </button>
+        <button
+          type="button"
+          class="bg-[#FF6F3C] text-white px-3 py-1.5 rounded-md shadow hover:bg-orange-600 transition text-left focus:outline-none"
+          data-prompt="Cyclone safety measures for coastal areas"
+        >
+          Cyclone safety measures for coastal areas
+        </button>
+        <button
+          type="button"
+          class="bg-[#FF6F3C] text-white px-3 py-1.5 rounded-md shadow hover:bg-orange-600 transition text-left focus:outline-none"
+          data-prompt="How to make a family disaster plan?"
+        >
+          How to make a family disaster plan?
+        </button>
+      </div>
+    </aside>
+
+    <!-- Collapsible sidebar toggle button for mobile -->
+    <button
+      id="sidebarToggle"
+      aria-label="Toggle Sidebar"
+      class="md:hidden fixed top-16 right-5 z-30 bg-[#FF6F3C] p-2 rounded-md shadow hover:bg-orange-600 transition focus:outline-none"
+      title="Toggle Quick Prompts"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <!-- Chat / Main Interface -->
+    <main
+      class="flex flex-col flex-1 px-4 py-6 max-w-4xl mx-auto w-full"
+      style="min-height: 0;"  <!-- To make scroll work well on smaller screens -->
+    >
+      <div class="flex flex-col flex-grow mb-4 overflow-y-auto" id="chatArea" style="min-height: 320px; max-height: 60vh;">
+        <!-- Chat messages will be appended here -->
+      </div>
+
+      <!-- Input box area -->
+      <form id="chatForm" class="flex items-center space-x-3 mt-auto">
+        <input
+          id="userInput"
+          type="text"
+          autocomplete="off"
+          placeholder="Ask about disaster safety, relief steps, or preparedness tips..."
+          class="flex-grow rounded-md bg-[#112B4E] border border-[#264773] focus:border-[#FF6F3C] focus:ring-2 focus:ring-[#FF6F3C] text-white px-4 py-2 placeholder-[#A0AEC0] shadow-sm transition"
+          required
+          aria-label="Ask a disaster preparedness question"
+        />
+        <button
+          type="submit"
+          class="bg-[#FF6F3C] text-white px-5 py-2 rounded-md shadow hover:bg-orange-600 transition focus:outline-none"
+          aria-label="Send question"
+        >
+          Ask
+        </button>
+      </form>
+    </main>
+
+  </div>
+
+<script>
+  // Elements
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const chatForm = document.getElementById('chatForm');
+  const userInput = document.getElementById('userInput');
+  const chatArea = document.getElementById('chatArea');
+
+  // Toggle sidebar on mobile
+  sidebarToggle.addEventListener('click', () => {
+    if (sidebar.classList.contains('hidden')) {
+      sidebar.classList.remove('hidden');
+    } else {
+      sidebar.classList.add('hidden');
+    }
+  });
+
+  // Auto-fill input box from quick prompt buttons
+  sidebar.querySelectorAll('button[data-prompt]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      userInput.value = btn.getAttribute('data-prompt');
+      userInput.focus();
+    });
+  });
+
+  // Append message to chat area (user or assistant)
+  function appendMessage(content, sender = 'assistant') {
+    const messageWrapper = document.createElement('div');
+    messageWrapper.className =
+      'bg-[#112B4E] rounded-lg shadow-md p-4 mb-4 max-w-full md:max-w-[75%] ' +
+      (sender === 'user' ? 'self-end bg-[#FF6F3C] text-white' : 'text-white');
+    // user messages have bright orange bg with white text, assistant messages have navy bg with white
+
+    const messageText = document.createElement('p');
+    messageText.className = sender === 'assistant' ? 'text-white' : 'text-white font-semibold';
+    messageText.textContent = content;
+
+    messageWrapper.appendChild(messageText);
+
+    if (sender === 'assistant') {
+      const secondaryText = document.createElement('p');
+      secondaryText.className = 'text-[#A0AEC0] mt-1 text-sm';
+      secondaryText.textContent = 'EduResQ AI response';
+      messageWrapper.appendChild(secondaryText);
+    }
+
+    chatArea.appendChild(messageWrapper);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
+  // Handle form submission (simulate chat response)
+  chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const question = userInput.value.trim();
+    if (!question) return;
+
+    // Append user message
+    appendMessage(question, 'user');
+
+    // Clear input
+    userInput.value = '';
+
+    // Simulate AI response after short delay
+    setTimeout(() => {
+      // Placeholder assistant response
+      appendMessage(`This is a helpful response for: "${question}"`);
+    }, 800);
+  });
+</script>
+</body>
+</html>
